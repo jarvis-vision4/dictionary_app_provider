@@ -1,8 +1,8 @@
-
 import '../db/db_service.dart';
 import '../model/word_model.dart';
 import 'package:flutter/material.dart';
-class DictionaryNotifier extends ChangeNotifier{
+
+class DictionaryNotifier extends ChangeNotifier {
   List<WordModel> wordList = [];
   List<WordModel> favWordList = [];
   String _keyword = "";
@@ -15,6 +15,7 @@ class DictionaryNotifier extends ChangeNotifier{
       notifyListeners();
     });
   }
+
   void search(String keyword) async {
     _keyword = keyword;
     if (keyword.isEmpty) {
@@ -35,5 +36,4 @@ class DictionaryNotifier extends ChangeNotifier{
     favWordList = await DbService.getFavWords();
     notifyListeners();
   }
-
 }

@@ -21,16 +21,17 @@ class _FavoritePageState extends State<FavoritePage> {
       Provider.of<DictionaryNotifier>(context, listen: false).getFavWords();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Favourite List'),
+      appBar: AppBar(title: Text('Favourite List')),
+      body: Consumer<DictionaryNotifier>(
+        builder: (_, notifier, _) {
+          List<WordModel> favList = notifier.favWordList;
+          return WordList(resultList: favList);
+        },
       ),
-      body: Consumer<DictionaryNotifier>(builder: (_,notifier,_){
-        List<WordModel> favList = notifier.favWordList;
-        return WordList(resultList: favList);
-      }),
     );
   }
 }

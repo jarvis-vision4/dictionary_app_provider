@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'notifier/dictionary_notifier.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DbService.init();
   runApp(const MyApp());
@@ -15,11 +15,10 @@ void main() async{
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context)=>DictionaryNotifier() ,
+      create: (context) => DictionaryNotifier(),
       child: MaterialApp(
         // themeMode: ThemeMode.dark,
         // theme: ThemeData.light(),
@@ -43,8 +42,10 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    DictionaryNotifier dbNotifier =
-    Provider.of<DictionaryNotifier>(context, listen: false);
+    DictionaryNotifier dbNotifier = Provider.of<DictionaryNotifier>(
+      context,
+      listen: false,
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text("Engineering Dictionary"),
@@ -52,19 +53,24 @@ class _HomeState extends State<Home> {
           IconButton(
             tooltip: 'Favourite Page',
             onPressed: () {
-              Navigator.push(context,MaterialPageRoute(builder: (_){
-                return FavoritePage();
-              }));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) {
+                    return FavoritePage();
+                  },
+                ),
+              );
             },
             icon: Icon(Icons.favorite),
-          )
+          ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-        TextField(
+        child: Column(
+          children: [
+            TextField(
               controller: _controller,
               onChanged: (String? text) {
                 setState(() {});
@@ -76,17 +82,17 @@ class _HomeState extends State<Home> {
                 enabledBorder: OutlineInputBorder(),
                 suffixIcon: (_controller.text.trim().isNotEmpty)
                     ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _controller.clear();
-                    });
-                  },
-                  icon: Icon(Icons.clear),
-                  )
+                        onPressed: () {
+                          setState(() {
+                            _controller.clear();
+                          });
+                        },
+                        icon: Icon(Icons.clear),
+                      )
                     : SizedBox.shrink(),
-                ),
-          ),
-          Expanded(child: ResultList()),
+              ),
+            ),
+            Expanded(child: ResultList()),
           ],
         ),
       ),
